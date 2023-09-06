@@ -13,8 +13,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.SPlayer;
@@ -37,10 +37,10 @@ public class Wolf extends Kit {
 	
 	@Override
 	public void dropBelowHalfHealth(DropBelowHalfHealthEvent e) {
-		SPlayer s = Main.getPlayer(e.getPlayer().getUniqueId());
+		SPlayer s = SuperCraftBros.getPlayer(e.getPlayer().getUniqueId());
 		if (s.hasKit() && s.getKit().getType() == kitType.WOLF) {
 			Location l = e.getPlayer().getLocation();
-			Game g = Main.getGame(e.getPlayer());
+			Game g = SuperCraftBros.getGame(e.getPlayer());
 			for (int i = 0 ; i < 3; i++) {
 				org.bukkit.entity.Wolf wolf = (org.bukkit.entity.Wolf) l.getWorld().spawnEntity(l, EntityType.WOLF);
 				wolf.setOwner(e.getPlayer());

@@ -3,7 +3,7 @@ package me.superpenguin.supercraftbros.kits;
 import java.util.Arrays;
 import java.util.List;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.SPlayer;
 import me.superpenguin.supercraftbros.tags.DoubleFireDamage;
@@ -24,7 +24,7 @@ import me.superpenguin.supercraftbros.objects.Armour;
 public class Yeti extends Kit implements DoubleFireDamage {
 	
 	public Yeti() {
-		super(	Main.kitType.YETI,
+		super(	SuperCraftBros.kitType.YETI,
 				"Yeti",
 				new Armour(u.getHead("4a089fb5c736f7f288a61c6e81601b5b13c2b945006ee9bab62306cb19df7d07"))
 				);
@@ -42,7 +42,7 @@ public class Yeti extends Kit implements DoubleFireDamage {
 	@Override
 	public void DamageDoneWithWeapon1(EntityDamageByEntityEvent e) {
 		Player hit = (Player) e.getEntity();
-		SPlayer s = Main.getPlayer(hit.getUniqueId());
+		SPlayer s = SuperCraftBros.getPlayer(hit.getUniqueId());
 				if (!s.getKit().toString().equalsIgnoreCase("Yeti")) hit.setFreezeTicks(140  + (20 * 5));
 	}
 	
@@ -50,7 +50,7 @@ public class Yeti extends Kit implements DoubleFireDamage {
 	public void DamageDoneWithBonusItem(EntityDamageByEntityEvent e) {
 		ItemStack ice = ((Player)e.getDamager()).getInventory().getItemInMainHand();
 		ice.setAmount(ice.getAmount()-1);
-		SPlayer hurt = Main.getPlayer(((Player)e.getEntity()).getUniqueId());
+		SPlayer hurt = SuperCraftBros.getPlayer(((Player)e.getEntity()).getUniqueId());
 		hurt.setLastDamagedBy((Player)e.getDamager());
 		e.setDamage(10);
 	}
@@ -58,8 +58,8 @@ public class Yeti extends Kit implements DoubleFireDamage {
 	@Override
 	public void RightClickWithBonusItem(PlayerInteractEvent e) {
 		if (e.getItem().getItemMeta().getLocalizedName().equalsIgnoreCase("bonus2")) {
-			for (Player p : Main.getGame(e.getPlayer()).getAlivePlayersWithout(e.getPlayer())) {
-				Main.frozen.add(p.getUniqueId());
+			for (Player p : SuperCraftBros.getGame(e.getPlayer()).getAlivePlayersWithout(e.getPlayer())) {
+				SuperCraftBros.frozen.add(p.getUniqueId());
 				p.setFreezeTicks(180);
 				p.sendMessage(u.cc("&cYou have been frozen by a Yeti!"));
 				u.sendLater(p, "&aYou have been unfrozen, run!", 3);
@@ -67,9 +67,9 @@ public class Yeti extends Kit implements DoubleFireDamage {
 			new BukkitRunnable() {				
 				@Override
 				public void run() {
-					Main.frozen.clear();
+					SuperCraftBros.frozen.clear();
 				}
-			}.runTaskLater(Main.getPlugin(Main.class), 60);
+			}.runTaskLater(SuperCraftBros.getPlugin(SuperCraftBros.class), 60);
 			e.getPlayer().getInventory().getItemInMainHand().setAmount(0);
 		}
 	}

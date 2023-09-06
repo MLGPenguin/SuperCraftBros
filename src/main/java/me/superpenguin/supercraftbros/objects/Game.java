@@ -20,7 +20,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.kits.Steve;
 import me.superpenguin.supercraftbros.objects.Map.MapType;
 import me.superpenguin.supercraftbros.utils.MIB;
@@ -63,14 +63,14 @@ public class Game {
 		p.teleport(map.getLobbySpawn());
 		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
 		p.setHealth(20);;
-		if (Main.playerData.containsKey(uuid)) Main.playerData.remove(uuid);
+		if (SuperCraftBros.playerData.containsKey(uuid)) SuperCraftBros.playerData.remove(uuid);
 		p.getInventory().setItem(4, getKitSelectionItem());
 		broadcastMessage("&6" + p.getName() + " has joined the game (" + getAmountAlive() + "/4)");
 	}
 	
 	public void startLobby(Player started) {
-		ID = Main.getNewGameID();
-		Main.runningGames.put(ID, this);
+		ID = SuperCraftBros.getNewGameID();
+		SuperCraftBros.runningGames.put(ID, this);
 		this.state = gamestate.LOBBY;
 		for (Player p : players) prepareForLobby(p);		
 		startLobbyCountdown();
@@ -81,7 +81,7 @@ public class Game {
 		if (players.size() > 1) {
 			for (Player p : players) {
 				p.teleport(getSafeSpawn());
-				SPlayer s = Main.getPlayer(p.getUniqueId());
+				SPlayer s = SuperCraftBros.getPlayer(p.getUniqueId());
 				if (!s.hasKit()) s.setKit(new Steve());
 				s.applyKit();
 				s.setLives(s.getKit().getLives());
@@ -107,7 +107,7 @@ public class Game {
 	private void generateScoreboard() {
 		scoreboard b = new scoreboard("lives", "&6Lives");
 		for (Player p : players) {
-			SPlayer s = Main.getPlayer(p.getUniqueId());
+			SPlayer s = SuperCraftBros.getPlayer(p.getUniqueId());
 			b.addDynamicLine(p.getName(), "&4" + p.getName() + "&f: ", "&b" + s.getLives());
 		}
 		b.addStaticLine(" ");
@@ -130,7 +130,7 @@ public class Game {
 			public void run() {
 				startGame();
 			}
-		}.runTaskLater(Main.getPlugin(Main.class), 60 * 20);
+		}.runTaskLater(SuperCraftBros.getPlugin(SuperCraftBros.class), 60 * 20);
 	}
 	
 	private void startMessageTimer(int secondsAway, int secondsRemaining) {
@@ -139,7 +139,7 @@ public class Game {
 			public void run() {
 				broadcastMessage("&6" + secondsRemaining + " seconds until the game starts");
 			}
-		}.runTaskLater(Main.getPlugin(Main.class), secondsAway * 20);
+		}.runTaskLater(SuperCraftBros.getPlugin(SuperCraftBros.class), secondsAway * 20);
 	}
 	
 	public void broadcastMessage(String msg) { players.forEach(p -> p.sendMessage(u.cc(msg))); }	
@@ -160,7 +160,7 @@ public class Game {
 		List<String> list = new ArrayList<>();
 		for (int i = 0 ; i < ranking.size() ; i++) {
 			Player p = ranking.get(i);
-			SPlayer s = Main.getPlayer(p.getUniqueId());
+			SPlayer s = SuperCraftBros.getPlayer(p.getUniqueId());
 			list.add(u.cc("&b" + (i+1) + "- &6" + p.getName() + ": &b" + s.getKills() + " kills"));
 		}
 		return list;
@@ -185,7 +185,7 @@ public class Game {
 	}
 	
 	public void eliminatePlayer(Player p) {
-		SPlayer s = Main.getPlayer(p.getUniqueId());		
+		SPlayer s = SuperCraftBros.getPlayer(p.getUniqueId());
 		ranking.add(0, p);
 		if (state != gamestate.LOBBY) s.addAlivems(timer.getCurrentms());
 		alivePlayers.remove(p);
@@ -208,7 +208,7 @@ public class Game {
 	}
 	
 	private void win(Player p) {
-		SPlayer s = Main.getPlayer(p.getUniqueId());
+		SPlayer s = SuperCraftBros.getPlayer(p.getUniqueId());
 		s.addWin();
 		s.multiplyGems(2);
 		s.addGems(5);
@@ -226,7 +226,7 @@ public class Game {
 	}
 	
 	private void endPlayer(Player p) {
-		SPlayer s = Main.getPlayerWithoutCreating(p.getUniqueId());
+		SPlayer s = SuperCraftBros.getPlayerWithoutCreating(p.getUniqueId());
 		if (s != null) {
 			s.setBlocksToAir();
 			if (s.hasKit()) s.removeKit();
@@ -256,14 +256,14 @@ public class Game {
 		spawnedEntities.forEach(e -> e.remove());
 		spawnedEntities.clear();
 		players.forEach(p -> {
-			Main.playerData.remove(p.getUniqueId());
+			SuperCraftBros.playerData.remove(p.getUniqueId());
 			p.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 		});
 	}
 	
 	public void endGame() {
 		endGameWithoutRemoving();
-		Main.runningGames.remove(ID);
+		SuperCraftBros.runningGames.remove(ID);
 		
 	}
 	

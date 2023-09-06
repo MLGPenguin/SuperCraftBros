@@ -6,7 +6,7 @@ import me.superpenguin.supercraftbros.utils.u;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.objects.GUI;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.SPlayer;
@@ -21,7 +21,7 @@ public class SelectKit extends GUI implements Paged {
 	}
 	
 	public Inventory getInventory(Player p) {
-		return Main.getKitInventory(page);
+		return SuperCraftBros.getKitInventory(page);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class SelectKit extends GUI implements Paged {
 
 	@Override
 	public boolean hasNextPage() {
-		return Main.getPages() > page;
+		return SuperCraftBros.getPages() > page;
 	}
 	
 	@Override
@@ -57,7 +57,7 @@ public class SelectKit extends GUI implements Paged {
 		} else {
 			Kit kit = translator.getKit(locname);
 			if (kit != null) {
-				SPlayer sp = Main.getPlayer(p.getUniqueId());
+				SPlayer sp = SuperCraftBros.getPlayer(p.getUniqueId());
 				sp.setKit(kit);
 				p.sendMessage(u.cc("&bSelected " + kit.getName() + " kit"));
 			}

@@ -73,9 +73,9 @@ import me.superpenguin.supercraftbros.tags.WitherResistant;
 
 public class MainListener implements Listener{
 	
-	private Main plugin;
+	private SuperCraftBros plugin;
 	
-	public MainListener(Main plugin) {
+	public MainListener(SuperCraftBros plugin) {
 		this.plugin = plugin;
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
@@ -84,21 +84,21 @@ public class MainListener implements Listener{
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
 		IPlayer i = new IPlayer(p.getUniqueId());
-		Main.setPersistentPlayer(p.getUniqueId(), i);
+		SuperCraftBros.setPersistentPlayer(p.getUniqueId(), i);
 		// teleport em to spawn
 	}
 	
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) {
 		UUID uuid = e.getPlayer().getUniqueId();
-		Game g = Main.getGame(e.getPlayer());
+		Game g = SuperCraftBros.getGame(e.getPlayer());
 		if (g != null) {
 			g.eliminatePlayer(e.getPlayer());
 			g.removePlayer(e.getPlayer());
 		}
-		Main.getPersistentPlayer(uuid).save();
-		Main.removePersistentPlayer(uuid);
-		if (Main.playerData.containsKey(uuid)) Main.playerData.remove(uuid);
+		SuperCraftBros.getPersistentPlayer(uuid).save();
+		SuperCraftBros.removePersistentPlayer(uuid);
+		if (SuperCraftBros.playerData.containsKey(uuid)) SuperCraftBros.playerData.remove(uuid);
 		if (Parties.isInParty(uuid)) Parties.getParty(uuid).removePlayer(uuid);
 		e.getPlayer().getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 	}
@@ -116,7 +116,7 @@ public class MainListener implements Listener{
 				public void run() {
 					e.getPlayer().getInventory().removeItem(new ItemStack(Material.GLASS_BOTTLE));
 				}
-			}.runTaskLater(Main.get(), 1);
+			}.runTaskLater(SuperCraftBros.get(), 1);
 		}
 	}
 	
@@ -124,8 +124,8 @@ public class MainListener implements Listener{
 	public void InventoryClick(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
 		UUID uuid = p.getUniqueId();
-		if (Main.viewingGUI.containsKey(uuid)) {
-			GUI gui = Main.viewingGUI.get(uuid);
+		if (SuperCraftBros.viewingGUI.containsKey(uuid)) {
+			GUI gui = SuperCraftBros.viewingGUI.get(uuid);
 			if (gui.getType() != GUI.GUIType.CRAFTING) e.setCancelled(true);
 			if (e.getView().getTopInventory().equals(e.getClickedInventory())) {
 				ItemStack clicked = e.getCurrentItem();
@@ -144,7 +144,7 @@ public class MainListener implements Listener{
 	@EventHandler
 	public void InventoryCloseHandler(InventoryCloseEvent e) {
 		UUID uuid = e.getPlayer().getUniqueId();
-		if (Main.viewingGUI.containsKey(uuid)) Main.viewingGUI.remove(uuid);
+		if (SuperCraftBros.viewingGUI.containsKey(uuid)) SuperCraftBros.viewingGUI.remove(uuid);
 	}
 	
 	@EventHandler
@@ -152,8 +152,8 @@ public class MainListener implements Listener{
 		if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
 			Player damager = (Player) e.getDamager();
 			Player damaged = (Player) e.getEntity();
-			SPlayer Sdamager = Main.getPlayer(damager.getUniqueId());
-			SPlayer Sdamaged = Main.getPlayer(damaged.getUniqueId());
+			SPlayer Sdamager = SuperCraftBros.getPlayer(damager.getUniqueId());
+			SPlayer Sdamaged = SuperCraftBros.getPlayer(damaged.getUniqueId());
 			Sdamaged.setLastDamagedBy(damager);			
 			/*
 			 * Can for example add Debugger around this and then use getKit().getName() + " Damaged By Player" as the debug name.
@@ -179,7 +179,7 @@ public class MainListener implements Listener{
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		SPlayer sp = Main.getPlayer(p.getUniqueId());
+		SPlayer sp = SuperCraftBros.getPlayer(p.getUniqueId());
 		if (u.canInteract(p.getUniqueId())) {
 			if (sp.hasKit()) {				
 				Kit kit = sp.getKit();
@@ -193,7 +193,7 @@ public class MainListener implements Listener{
 					else if (locname.equalsIgnoreCase("weapon1")) {
 						if (a == Action.RIGHT_CLICK_BLOCK || a == Action.RIGHT_CLICK_AIR) kit.RightClickWithWeapon1(e);
 					} 
-					if (!locname.equalsIgnoreCase("selectkit")) Main.lastInteract.put(p.getUniqueId(), Instant.now());
+					if (!locname.equalsIgnoreCase("selectkit")) SuperCraftBros.lastInteract.put(p.getUniqueId(), Instant.now());
 				} catch (NullPointerException ex) { return; }
 			}
 		}
@@ -207,12 +207,12 @@ public class MainListener implements Listener{
 			if (held.getType() == Material.COMPASS && held.getItemMeta().hasLocalizedName()) {
 				if (held.getItemMeta().getLocalizedName().equals("selectkit")) {
 					if (u.canInteract(p.getUniqueId())) {
-						if (!Main.isInGame(p.getUniqueId())) {
+						if (!SuperCraftBros.isInGame(p.getUniqueId())) {
 							held.setAmount(0);
 							return;
 						}
 						u.openLaterandAdd(p, new SelectKit());
-						Main.lastInteract.put(p.getUniqueId(), Instant.now());
+						SuperCraftBros.lastInteract.put(p.getUniqueId(), Instant.now());
 						return;
 					}
 				}
@@ -226,12 +226,12 @@ public class MainListener implements Listener{
 		ProjectileSource launcher = e.getEntity().getShooter();
 		Entity Hit = e.getHitEntity();
 		if (launcher instanceof Player) {
-			SPlayer sp = Main.getPlayer(((Player)launcher).getUniqueId());
+			SPlayer sp = SuperCraftBros.getPlayer(((Player)launcher).getUniqueId());
 			if (sp.hasKit()) {
 				sp.getKit().HandleProjectileHit(e);				
 			}
 			if (Hit != null && Hit instanceof Player) {
-				SPlayer hit = Main.getPlayer(((Player)Hit).getUniqueId());
+				SPlayer hit = SuperCraftBros.getPlayer(((Player)Hit).getUniqueId());
 				hit.setLastDamagedBy((Player) launcher);
 			}
 		}
@@ -241,7 +241,7 @@ public class MainListener implements Listener{
 	public void onLaunch(ProjectileLaunchEvent e) {
 		ProjectileSource launcher = e.getEntity().getShooter();
 		if (launcher instanceof Player) {
-			SPlayer sp = Main.getPlayer(((Player)launcher).getUniqueId());
+			SPlayer sp = SuperCraftBros.getPlayer(((Player)launcher).getUniqueId());
 			if (sp.hasKit()) {
 				sp.getKit().HandleProjectileThrow(e);
 			}
@@ -251,14 +251,14 @@ public class MainListener implements Listener{
 	@EventHandler
 	public void onDie(PlayerDeathEvent e) {		
 		Player p = e.getEntity();
-		SPlayer killed = Main.getPlayer(p.getUniqueId());
+		SPlayer killed = SuperCraftBros.getPlayer(p.getUniqueId());
 		SPlayer killer = null;
 		boolean self = false;
 		if (killed.getLastDamagedBy() != null) {
-			killer = Main.getPlayer(killed.getLastDamagedBy().getUniqueId());
+			killer = SuperCraftBros.getPlayer(killed.getLastDamagedBy().getUniqueId());
 			self = killer.getPlayer().getName().equals(p.getName());
 		}
-		Game g = Main.getGame(p);
+		Game g = SuperCraftBros.getGame(p);
 		if (g != null) {
 			if (g.getState() == Game.gamestate.ONGOING) {
 				if (killed.hasKit()) killed.getKit().OnKitKilled(e);		
@@ -295,7 +295,7 @@ public class MainListener implements Listener{
 	@EventHandler
 	public void onDamage(EntityDamageEvent e) {
 		if (e.getEntity() instanceof Player) {
-			SPlayer sp = Main.getPlayer(((Player)e.getEntity()).getUniqueId());
+			SPlayer sp = SuperCraftBros.getPlayer(((Player)e.getEntity()).getUniqueId());
 			if (sp.hasKit()) {
 				sp.getKit().takenDamage(e);
 			}
@@ -313,8 +313,8 @@ public class MainListener implements Listener{
 	@EventHandler
 	public void onRespawn(PlayerRespawnEvent e) {
 		Player p = e.getPlayer();
-		SPlayer sp = Main.getPlayer(p.getUniqueId());
-		Game g = Main.getGame(p);
+		SPlayer sp = SuperCraftBros.getPlayer(p.getUniqueId());
+		Game g = SuperCraftBros.getGame(p);
 		if (g != null) {
 			if (g.getState() == Game.gamestate.ONGOING) {
 				e.setRespawnLocation(g.getSafeSpawn());
@@ -337,7 +337,7 @@ public class MainListener implements Listener{
 		if (e.getSpawnReason() == SpawnReason.SPAWNER_EGG) {
 			if (e.getEntity().getType() == EntityType.PHANTOM) {
 				for (Entity en  : e.getEntity().getNearbyEntities(20, 20, 20).stream().filter(x -> x.getType() == EntityType.PLAYER).collect(Collectors.toList())) {
-					SPlayer sp = Main.getPlayer(((Player)en).getUniqueId());
+					SPlayer sp = SuperCraftBros.getPlayer(((Player)en).getUniqueId());
 					if (!sp.getKit().getClass().getName().equals("Phantom")) {
 						Phantom p = (Phantom) e.getEntity();
 						p.setTarget((Player)en);
@@ -352,7 +352,7 @@ public class MainListener implements Listener{
 	public void onLoseHunger(FoodLevelChangeEvent e) {
 		if (e.getEntity() instanceof Player) {
 			Player hungry = (Player) e.getEntity();
-			SPlayer sp = Main.getPlayer(hungry.getUniqueId());
+			SPlayer sp = SuperCraftBros.getPlayer(hungry.getUniqueId());
 			if (sp.hasKit()) e.setCancelled(true);
 		}
 	}
@@ -378,7 +378,7 @@ public class MainListener implements Listener{
 	public void handlerBowFire(EntityShootBowEvent e) {
 		if (e.getEntity() instanceof Player) {
 			Player p = (Player) e.getEntity();
-			SPlayer sp = Main.getPlayer(p.getUniqueId());
+			SPlayer sp = SuperCraftBros.getPlayer(p.getUniqueId());
 			if (sp.hasKit()) sp.getKit().shootBow(e);
 		}
 	}
@@ -397,7 +397,7 @@ public class MainListener implements Listener{
 	public void onInteract(PlayerInteractAtEntityEvent e) {
 		if (e.getRightClicked() instanceof Player) {
 			Player hitting = e.getPlayer();
-			SPlayer s = Main.getPlayer(hitting.getUniqueId());
+			SPlayer s = SuperCraftBros.getPlayer(hitting.getUniqueId());
 			ItemStack weapon = hitting.getInventory().getItemInMainHand();
 			try {
 				String locname = weapon.getItemMeta().getLocalizedName();
@@ -412,7 +412,7 @@ public class MainListener implements Listener{
 	
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
-		if (Main.frozen.contains(e.getPlayer().getUniqueId())) {
+		if (SuperCraftBros.frozen.contains(e.getPlayer().getUniqueId())) {
 			Location from = e.getFrom();
 			Location to =  e.getTo();
 			if (from.getX() != to.getX()  || from.getZ() != to.getZ()) {
@@ -442,7 +442,7 @@ public class MainListener implements Listener{
 	@EventHandler
 	public void onHalfHealth(DropBelowHalfHealthEvent e) {
 		UUID uuid = e.getPlayer().getUniqueId();
-		SPlayer s =  Main.getPlayerWithoutCreating(uuid);
+		SPlayer s =  SuperCraftBros.getPlayerWithoutCreating(uuid);
 		try {
 			if (s != null) s.getKit().dropBelowHalfHealth(e);		
 		} catch (NullPointerException ex) { return; }
@@ -453,11 +453,11 @@ public class MainListener implements Listener{
 	public void explode(EntityDamageByEntityEvent e) {
 		if (!(e.getEntity() instanceof Player)) return;
 		Player p = (Player) e.getEntity();
-		SPlayer s = Main.getPlayer(p.getUniqueId());
+		SPlayer s = SuperCraftBros.getPlayer(p.getUniqueId());
 		if (e.getDamager().getType() == EntityType.PRIMED_TNT) {
 			TNTPrimed t = (TNTPrimed) e.getDamager();
-			if (t.getPersistentDataContainer().has(new NamespacedKey(Main.get(), "Creeper"), PersistentDataType.STRING)) {
-				String name = t.getPersistentDataContainer().get(new NamespacedKey(Main.get(), "Creeper"), PersistentDataType.STRING);
+			if (t.getPersistentDataContainer().has(new NamespacedKey(SuperCraftBros.get(), "Creeper"), PersistentDataType.STRING)) {
+				String name = t.getPersistentDataContainer().get(new NamespacedKey(SuperCraftBros.get(), "Creeper"), PersistentDataType.STRING);
 				Player creeper = Bukkit.getPlayerExact(name);
 				s.setLastDamagedBy(creeper);
 			}			
@@ -478,9 +478,9 @@ public class MainListener implements Listener{
 	@EventHandler
 	public void preventHatching(PlayerEggThrowEvent e) {
 		Player p = e.getPlayer();
-		SPlayer s = Main.getPlayerWithoutCreating(p.getUniqueId());
+		SPlayer s = SuperCraftBros.getPlayerWithoutCreating(p.getUniqueId());
 		if (s != null && s.hasKit()) {
-			if (s.getKit().getType().equals(Main.kitType.CHICKEN)) e.setHatching(false);
+			if (s.getKit().getType().equals(SuperCraftBros.kitType.CHICKEN)) e.setHatching(false);
 		}
 	}
 	
@@ -494,7 +494,7 @@ public class MainListener implements Listener{
 	public void preventDamage(EntityDamageEvent e) {
 		DamageCause c = e.getCause();
 		if (e.getEntityType() != EntityType.PLAYER) return;
-		SPlayer s = Main.getPlayerWithoutCreating(((Player)e.getEntity()).getUniqueId());
+		SPlayer s = SuperCraftBros.getPlayerWithoutCreating(((Player)e.getEntity()).getUniqueId());
 		if (s != null && s.hasKit()) {			
 			Kit type = s.getKit();
 			switch (c) {

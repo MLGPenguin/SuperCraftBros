@@ -13,8 +13,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 
@@ -44,7 +44,7 @@ public class PolarBear extends Kit implements DoubleFireDamage {
 	public void RightClickWithBonusItem(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 		if (u.isHoldingBonusItem(p)) {
-			u.applyPotionEffectToAll(Main.getGame(p).getAlivePlayersWithout(p), PotionEffectType.WEAKNESS, 1, 15);
+			u.applyPotionEffectToAll(SuperCraftBros.getGame(p).getAlivePlayersWithout(p), PotionEffectType.WEAKNESS, 1, 15);
 			u.takeOneFromItemInHand(p);
 		}
 	}

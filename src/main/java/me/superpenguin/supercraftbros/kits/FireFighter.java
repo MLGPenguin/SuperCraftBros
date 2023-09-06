@@ -15,7 +15,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 

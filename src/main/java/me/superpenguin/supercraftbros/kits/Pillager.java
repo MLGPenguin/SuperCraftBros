@@ -16,8 +16,8 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 
@@ -46,7 +46,7 @@ public class Pillager extends Kit {
 
 	@Override
 	public void RightClickWithBonusItem(PlayerInteractEvent e) {
-		u.applyPotionEffectToAll(Main.getGame(e.getPlayer()).getAlivePlayersWithout(e.getPlayer()), PotionEffectType.WEAKNESS, 1, 5);
+		u.applyPotionEffectToAll(SuperCraftBros.getGame(e.getPlayer()).getAlivePlayersWithout(e.getPlayer()), PotionEffectType.WEAKNESS, 1, 5);
 		e.getPlayer().getInventory().getItemInMainHand().setAmount(0);
 		
 	}

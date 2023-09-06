@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import me.superpenguin.supercraftbros.Main.kitType;
-import me.superpenguin.supercraftbros.Main.pack;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros.pack;
 
 public class KitSorter {
 	

@@ -8,7 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.objects.GUI;
 
 public class GlobalStatistics extends GUI {
@@ -21,7 +21,7 @@ public class GlobalStatistics extends GUI {
 	public Inventory getInventory(Player p) {
 		Inventory inv = Bukkit.createInventory(null, 54, u.cc("&bStatistics"));
 		
-		IPlayer ip = Main.getPersistentPlayer(p.getUniqueId());
+		IPlayer ip = SuperCraftBros.getPersistentPlayer(p.getUniqueId());
 		
 		inv.setItem(0, new MIB(Material.IRON_SWORD).setName("&4Kills").addLores("&bYou have " + ip.getKills() + " kills").setLocname("kills").build());
 		inv.setItem(1, new MIB(Material.BARRIER).setName("&4Deaths").addLores("&bYou have " + ip.getDeaths() + " deaths").build());

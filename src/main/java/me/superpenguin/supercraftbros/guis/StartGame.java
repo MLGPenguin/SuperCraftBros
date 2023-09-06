@@ -11,7 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.objects.GUI;
 import me.superpenguin.supercraftbros.objects.Parties;
 
@@ -42,7 +42,7 @@ public class StartGame extends GUI {
 		Map.MapType map = translator.getMap(locname);
 		UUID uuid = p.getUniqueId();
 		if (map != null) {
-			if (Main.getGame(p) == null) {
+			if (SuperCraftBros.getGame(p) == null) {
 				if (Parties.isInParty(uuid) && !(Parties.getParty(uuid).isLeader(uuid))) {
 					p.sendMessage(u.cc("&cWait for your party leader to start a game"));
 					return;

@@ -12,7 +12,7 @@ import org.bukkit.entity.DragonFireball;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 

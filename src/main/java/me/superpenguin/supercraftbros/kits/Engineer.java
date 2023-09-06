@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.SPlayer;
 import me.superpenguin.supercraftbros.utils.MIB;
@@ -23,7 +23,7 @@ import me.superpenguin.supercraftbros.objects.Armour;
 public class Engineer extends Kit {
 	
 	public Engineer() {
-		super(	Main.kitType.ENGINEER,
+		super(	SuperCraftBros.kitType.ENGINEER,
 				"Engineer",
 				new Armour(u.getHead("1062ad49dbcdb730291303e8d7011486adbae5a0d165a2a9fdc220b7735f223b"))
 				);
@@ -43,15 +43,15 @@ public class Engineer extends Kit {
 		UUID uuid = p.getUniqueId();
 		if (a == Action.RIGHT_CLICK_BLOCK) {
 			if (p.isSneaking()) {
-				Main.waypointTable.put(uuid, e.getClickedBlock().getLocation().add(0.5, 1, 0.5));
+				SuperCraftBros.waypointTable.put(uuid, e.getClickedBlock().getLocation().add(0.5, 1, 0.5));
 				p.sendMessage(u.cc("&aSet Waypoint!"));
 				return;
 			} 
 		}
-		if (Main.waypointTable.containsKey(uuid)) {
-			SPlayer s = Main.getPlayer(uuid);
+		if (SuperCraftBros.waypointTable.containsKey(uuid)) {
+			SPlayer s = SuperCraftBros.getPlayer(uuid);
 			if (s.isBonusReady()) {
-				Location loc = Main.waypointTable.get(uuid);
+				Location loc = SuperCraftBros.waypointTable.get(uuid);
 				loc.setPitch(p.getLocation().getPitch());
 				loc.setYaw(p.getLocation().getYaw());
 				p.teleport(loc);

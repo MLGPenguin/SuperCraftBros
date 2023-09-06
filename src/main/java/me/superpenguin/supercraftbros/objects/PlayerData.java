@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -56,8 +56,8 @@ public class PlayerData {
 		cfg.set("Suicides", 0);
 		cfg.set("XP", 0);
 		cfg.set("TotalXP", 0);
-		cfg.set("unlockedPacks", Arrays.asList(Main.pack.DEFAULT.toString()));
-		new ClassData(Main.kitType.STEVE).set(cfg);
+		cfg.set("unlockedPacks", Arrays.asList(SuperCraftBros.pack.DEFAULT.toString()));
+		new ClassData(SuperCraftBros.kitType.STEVE).set(cfg);
 		saveInitial(file);
 	}
 
@@ -98,16 +98,16 @@ public class PlayerData {
 		saveAsync();
 	}
 	
-	public void unlockKit(Main.kitType type) {
-		Set<Main.kitType> unlockedKits = getUnlockedKits();
+	public void unlockKit(SuperCraftBros.kitType type) {
+		Set<SuperCraftBros.kitType> unlockedKits = getUnlockedKits();
 		unlockedKits.add(type);
 	//	List<String> names = unlockedKits.stream().map(kitType::toString).collect(Collectors.toList());
 		cfg.set("unlockedKits", unlockedKits);
 		saveAsync();
 	}
 	
-	public void unlockPack(Main.pack pack) {
-		Set<Main.pack> unlockedPacks = getUnlockedPacks();
+	public void unlockPack(SuperCraftBros.pack pack) {
+		Set<SuperCraftBros.pack> unlockedPacks = getUnlockedPacks();
 		unlockedPacks.add(pack);
 		cfg.set("unlockedPacks", unlockedPacks);
 		saveAsync();
@@ -118,15 +118,15 @@ public class PlayerData {
 	 * Does not include packs
 	 * @return
 	 */
-	private Set<Main.kitType> getUnlockedKits() {
+	private Set<SuperCraftBros.kitType> getUnlockedKits() {
 		if (cfg.contains("unlockedKits"))
-		return cfg.getStringList("unlockedKits").stream().map((Main.kitType::valueOf)).collect(Collectors.toSet());
+		return cfg.getStringList("unlockedKits").stream().map((SuperCraftBros.kitType::valueOf)).collect(Collectors.toSet());
 		else return new HashSet<>();
 	}	
 	
 	
-	private Set<Main.pack> getUnlockedPacks() {
-		return cfg.getStringList("unlockedPacks").stream().map(Main.pack::valueOf).collect(Collectors.toSet());
+	private Set<SuperCraftBros.pack> getUnlockedPacks() {
+		return cfg.getStringList("unlockedPacks").stream().map(SuperCraftBros.pack::valueOf).collect(Collectors.toSet());
 	}
 
 	
@@ -148,7 +148,7 @@ public class PlayerData {
 			public void run() {
 				save();
 			}
-		}.runTaskAsynchronously(Main.get());
+		}.runTaskAsynchronously(SuperCraftBros.get());
 	}	
 
 
@@ -158,7 +158,7 @@ public class PlayerData {
 			public void run() {
 				save(player);
 			}
-		}.runTaskAsynchronously(Main.get());
+		}.runTaskAsynchronously(SuperCraftBros.get());
 	}
 	
 }

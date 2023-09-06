@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.utils.u;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -55,7 +55,7 @@ public class SPlayer {
 		this.damagedone = 0;
 		this.suicides = 0;
 		this.xp = 0;
-		if (!Main.playerData.containsKey(uuid)) Main.playerData.put(uuid, this);
+		if (!SuperCraftBros.playerData.containsKey(uuid)) SuperCraftBros.playerData.put(uuid, this);
 	}
 	
 	
@@ -94,9 +94,9 @@ public class SPlayer {
 	}
 	
 	public void saveToIPlayer() {
-		IPlayer i = Main.getPersistentPlayer(uuid);
+		IPlayer i = SuperCraftBros.getPersistentPlayer(uuid);
 		if (kit == null) return;
-		Main.kitType type = kit.getType();
+		SuperCraftBros.kitType type = kit.getType();
 		i.addDeaths(type, deaths);
 		i.addKills(type, kills);
 		i.addGamePlayed(type);

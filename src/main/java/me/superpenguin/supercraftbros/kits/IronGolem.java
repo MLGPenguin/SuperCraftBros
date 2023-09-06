@@ -3,7 +3,7 @@ package me.superpenguin.supercraftbros.kits;
 import java.util.Arrays;
 import java.util.List;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.utils.MIB;
 import me.superpenguin.supercraftbros.utils.u;
@@ -17,7 +17,7 @@ import me.superpenguin.supercraftbros.objects.Armour;
 public class IronGolem extends Kit {
 	
 	public IronGolem() {
-		super(	Main.kitType.IRONGOLEM,
+		super(	SuperCraftBros.kitType.IRONGOLEM,
 				"Iron Golem",
 				new Armour(u.getHead("89091d79ea0f59ef7ef94d7bba6e5f17f2f7d4572c44f90f76c4819a714"))
 				);

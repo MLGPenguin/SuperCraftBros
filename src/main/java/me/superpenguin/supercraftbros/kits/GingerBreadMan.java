@@ -11,8 +11,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.utils.MIB;
@@ -38,7 +38,7 @@ public class GingerBreadMan extends Kit {
 	@Override
 	public void RightClickWithBonusItem(PlayerInteractEvent e) {
 		e.setCancelled(true);
-		for (Player p : Main.getGame(e.getPlayer()).getAlivePlayersWithout(e.getPlayer())) p.setFireTicks(80);
+		for (Player p : SuperCraftBros.getGame(e.getPlayer()).getAlivePlayersWithout(e.getPlayer())) p.setFireTicks(80);
 		u.takeOneFromItemInHand(e.getPlayer());
 	}
 

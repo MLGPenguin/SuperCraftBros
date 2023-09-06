@@ -19,8 +19,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.SPlayer;
@@ -46,18 +46,18 @@ public class Vampire extends Kit {
 		Player p = e.getPlayer();
 		Action a = e.getAction();
 		UUID uuid = p.getUniqueId();
-		Game g = Main.getGame(p);
+		Game g = SuperCraftBros.getGame(p);
 		if (a == Action.RIGHT_CLICK_BLOCK) {
 			if (p.isSneaking()) {
-				Main.waypointTable.put(uuid, e.getClickedBlock().getLocation().add(0.5, 1, 0.5));
+				SuperCraftBros.waypointTable.put(uuid, e.getClickedBlock().getLocation().add(0.5, 1, 0.5));
 				p.sendMessage(u.cc("&aSet Waypoint!"));
 				return;
 			} 
 		}
-		if (Main.waypointTable.containsKey(uuid)) {
-			SPlayer s = Main.getPlayer(uuid);
+		if (SuperCraftBros.waypointTable.containsKey(uuid)) {
+			SPlayer s = SuperCraftBros.getPlayer(uuid);
 			if (s.isBonusReady()) {
-				Location loc = Main.waypointTable.get(uuid);
+				Location loc = SuperCraftBros.waypointTable.get(uuid);
 				loc.setPitch(p.getLocation().getPitch());
 				loc.setYaw(p.getLocation().getYaw());
 				Location existing = p.getLocation();

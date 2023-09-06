@@ -14,8 +14,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.SPlayer;
@@ -38,7 +38,7 @@ public class InfernoMage extends Kit {
 
 	@Override
 	public void RightClickWithWeapon1(PlayerInteractEvent e) {
-		SPlayer s = Main.getPlayer(e.getPlayer().getUniqueId());
+		SPlayer s = SuperCraftBros.getPlayer(e.getPlayer().getUniqueId());
 		if (s.isBonusReady()) {
 			Fireball b = e.getPlayer().launchProjectile(SmallFireball.class);
 			b.setVelocity(b.getVelocity().multiply(2));

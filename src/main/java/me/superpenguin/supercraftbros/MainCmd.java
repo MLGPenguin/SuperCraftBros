@@ -21,9 +21,9 @@ import me.superpenguin.supercraftbros.objects.Parties;
 
 public class MainCmd implements TabExecutor {
 	@SuppressWarnings("unused")
-	private Main plugin;
+	private SuperCraftBros plugin;
 	
-	public MainCmd(Main plugin) {
+	public MainCmd(SuperCraftBros plugin) {
 		this.plugin = plugin;
 		plugin.getCommand("startgame").setExecutor(this);
 		plugin.getCommand("kitsomething").setExecutor(this);
@@ -61,7 +61,7 @@ public class MainCmd implements TabExecutor {
 				}
 			} else if (cmd.getName().equalsIgnoreCase("gems")) {
 				if (args.length == 0) {
-					p.sendMessage(u.cc("&aYou have &a&n" + u.dc(Main.getPersistentPlayer(p.getUniqueId()).getGems()) + "&a Gems"));
+					p.sendMessage(u.cc("&aYou have &a&n" + u.dc(SuperCraftBros.getPersistentPlayer(p.getUniqueId()).getGems()) + "&a Gems"));
 					return true;
 				}
 			} else if (cmd.getName().equalsIgnoreCase("party")) {

@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 
 public class Clickable {
 	
@@ -33,7 +33,7 @@ public class Clickable {
 		}
 	}
 	
-	public List<Player> getOthers() { return Main.getGame(p).getAlivePlayersWithout(p); }
+	public List<Player> getOthers() { return SuperCraftBros.getGame(p).getAlivePlayersWithout(p); }
 	public boolean hasLocname() { return hasLocname; }
 	public boolean isBonus() { return isBonus; }
 	public boolean isBonus2() { return isBonus2; }

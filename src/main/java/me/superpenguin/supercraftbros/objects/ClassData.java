@@ -1,12 +1,12 @@
 package me.superpenguin.supercraftbros.objects;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class ClassData {
 	
-	private Main.kitType type;
+	private SuperCraftBros.kitType type;
 	private int kills, deaths, wins, gamesPlayed, damagedone;
 	private long TimeLived;
 	
@@ -15,7 +15,7 @@ public class ClassData {
 	 * @param type
 	 * @param kit Construct this with the ConfigurationSection("ClassData." + kitType.toString());
 	 */
-	public ClassData(Main.kitType type, ConfigurationSection kit) {
+	public ClassData(SuperCraftBros.kitType type, ConfigurationSection kit) {
 		this.type = type;
 		kills = kit.getInt("Kills");
 		deaths = kit.getInt("Deaths");
@@ -25,7 +25,7 @@ public class ClassData {
 		damagedone = kit.getInt("DamageDone");
 	}
 	
-	public ClassData(Main.kitType type) {
+	public ClassData(SuperCraftBros.kitType type) {
 		this.type = type;
 		kills = 0;
 		deaths = 0;

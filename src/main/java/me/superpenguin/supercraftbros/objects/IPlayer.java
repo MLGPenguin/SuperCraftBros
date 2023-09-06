@@ -8,8 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import me.superpenguin.supercraftbros.Main.kitType;
-import me.superpenguin.supercraftbros.Main.pack;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros.pack;
 import me.superpenguin.supercraftbros.utils.levelutil;
 
 /**

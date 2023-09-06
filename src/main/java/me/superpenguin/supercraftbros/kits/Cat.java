@@ -3,7 +3,7 @@ package me.superpenguin.supercraftbros.kits;
 import java.util.Arrays;
 import java.util.List;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.objects.Clickable;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.SPlayer;
@@ -23,7 +23,7 @@ public class Cat extends Kit {
 
 
 	public Cat() {
-		super( 	Main.kitType.CAT,
+		super( 	SuperCraftBros.kitType.CAT,
 				"Cat",
 				new Armour(u.getHead("399128eefb66b7a221c39e06e77d3a996e226052c5342a5358d6413a0e7f8498"))
 				);
@@ -51,7 +51,7 @@ public class Cat extends Kit {
 	
 	@Override
 	public void RightClickWithWeapon1(PlayerInteractEvent e) {
-		SPlayer s = Main.getPlayer(e.getPlayer().getUniqueId());
+		SPlayer s = SuperCraftBros.getPlayer(e.getPlayer().getUniqueId());
 		if (s.canUse()) {
 			e.getPlayer().setVelocity(e.getPlayer().getLocation().getDirection().multiply(2));					
 			s.setBonusCooldown(2);

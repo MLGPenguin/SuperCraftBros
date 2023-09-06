@@ -18,8 +18,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 
@@ -59,7 +59,7 @@ public class SnowGolem extends Kit implements DoubleFireDamage {
 	@Override
 	public void RightClickWithBonusItem(PlayerInteractEvent e) {
 		if (u.getHeldLocname(e.getPlayer()).equals("bonus2")) {
-			u.applyPotionEffectToAll(Main.getGame(e.getPlayer()).getAlivePlayersWithout(e.getPlayer()), PotionEffectType.SLOW, 1, 10);
+			u.applyPotionEffectToAll(SuperCraftBros.getGame(e.getPlayer()).getAlivePlayersWithout(e.getPlayer()), PotionEffectType.SLOW, 1, 10);
 			u.takeOneFromItemInHand(e.getPlayer());
 		}
 	}

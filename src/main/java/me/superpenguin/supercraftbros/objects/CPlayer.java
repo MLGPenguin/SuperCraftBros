@@ -1,6 +1,6 @@
 package me.superpenguin.supercraftbros.objects;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.utils.levelutil;
 import org.bukkit.entity.Player;
 
@@ -17,7 +17,7 @@ public class CPlayer {
 	
 	public CPlayer(Player player) {
 		this.player = player;
-		ip = Main.getPersistentPlayer(player.getUniqueId());
+		ip = SuperCraftBros.getPersistentPlayer(player.getUniqueId());
 	}
 
 	/**

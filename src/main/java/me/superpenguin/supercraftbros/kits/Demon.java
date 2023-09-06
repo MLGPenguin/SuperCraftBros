@@ -14,8 +14,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 
@@ -46,7 +46,7 @@ public class Demon extends Kit {
 	@Override
 	public void dropBelowHalfHealth(DropBelowHalfHealthEvent e) {
 		u.makeExplosionEffect(e.getPlayer().getLocation(), 40, 2);
-		e.getPlayer().teleport(Main.getGame(e.getPlayer()).getSafeSpawn());
+		e.getPlayer().teleport(SuperCraftBros.getGame(e.getPlayer()).getSafeSpawn());
 	}
 	
 	

@@ -44,8 +44,8 @@ import org.bukkit.profile.PlayerTextures;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.GUI;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.SPlayer;
@@ -223,7 +223,7 @@ public static Long getLargestLong(List<Long> longs) {
 			public void run() {
 				p.sendMessage(u.cc(message));
 			}
-		}.runTaskLater(Main.getPlugin(Main.class), 20*seconds);
+		}.runTaskLater(SuperCraftBros.getPlugin(SuperCraftBros.class), 20*seconds);
 	}
 
 	public static void removeItemInMainHand(Player p) {
@@ -263,11 +263,11 @@ public static Long getLargestLong(List<Long> longs) {
 	}
 	
 	public static void addTag(Entity entity, String keyname) {
-		entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(Main.class), keyname), PersistentDataType.INTEGER, 1);
+		entity.getPersistentDataContainer().set(new NamespacedKey(SuperCraftBros.getPlugin(SuperCraftBros.class), keyname), PersistentDataType.INTEGER, 1);
 	}
 	
 	public static boolean hasTag(Entity Entity, String keyname) {
-		return Entity.getPersistentDataContainer().has(new NamespacedKey(Main.getPlugin(Main.class), keyname), PersistentDataType.INTEGER);
+		return Entity.getPersistentDataContainer().has(new NamespacedKey(SuperCraftBros.getPlugin(SuperCraftBros.class), keyname), PersistentDataType.INTEGER);
 	}
 	
 	public static String getHeldLocname(Player p) {
@@ -302,8 +302,8 @@ public static Long getLargestLong(List<Long> longs) {
 	}
 	
 	public static long getTimeSinceLastInteractms(UUID uuid) {
-		if (Main.lastInteract.containsKey(uuid)) {
-			return Duration.between(Main.lastInteract.get(uuid), Instant.now()).toMillis();
+		if (SuperCraftBros.lastInteract.containsKey(uuid)) {
+			return Duration.between(SuperCraftBros.lastInteract.get(uuid), Instant.now()).toMillis();
 		} else return Integer.MAX_VALUE;
 	}
 	
@@ -325,7 +325,7 @@ public static Long getLargestLong(List<Long> longs) {
 	public static void DamageWithinRange(Location loc, double damage, Player source, double range, CustomCause Exception) {
 		List<Player> players = loc.getWorld().getNearbyEntities(loc, range, range, range).stream().filter(e -> e instanceof Player).map(e -> (Player) e).collect(Collectors.toList());
 		for (Player p : players) {
-			SPlayer s = Main.getPlayerWithoutCreating(p.getUniqueId());
+			SPlayer s = SuperCraftBros.getPlayerWithoutCreating(p.getUniqueId());
 			if (s != null && shouldHurt(s.getKit(), Exception)) {
 				p.damage(damage);
 				s.setLastDamagedBy(source);				
@@ -362,7 +362,7 @@ public static Long getLargestLong(List<Long> longs) {
 			public void run() {
 				p.openInventory(inv);
 			}
-		}.runTaskLater(Main.get(), 1);
+		}.runTaskLater(SuperCraftBros.get(), 1);
 	}
 	
 	public static void openLaterandAdd(Player p, GUI gui) {
@@ -370,9 +370,9 @@ public static Long getLargestLong(List<Long> longs) {
 			@Override
 			public void run() {
 				p.openInventory(gui.getInventory(p));
-				Main.viewingGUI.put(p.getUniqueId(), gui);				
+				SuperCraftBros.viewingGUI.put(p.getUniqueId(), gui);
 			}
-		}.runTaskLater(Main.get(), 1);
+		}.runTaskLater(SuperCraftBros.get(), 1);
 	}
 	
 	public static int getHalfHealth(Player p) { 
@@ -387,14 +387,14 @@ public static Long getLargestLong(List<Long> longs) {
 		new BukkitRunnable() {			
 			@Override
 			public void run() {
-				SPlayer s = Main.getPlayerWithoutCreating(p.getUniqueId());
+				SPlayer s = SuperCraftBros.getPlayerWithoutCreating(p.getUniqueId());
 				if (s != null) {
 					if (isBelowHealth(p, health)) {
 						u.applyPotionEffect(p, type, strength, 2);
 					} else cancel();
 				} else cancel();
 			}
-		}.runTaskTimer(Main.get(), 0, 39);
+		}.runTaskTimer(SuperCraftBros.get(), 0, 39);
 	}
 	
 	public static void reapplyIfBelowHalfHealthTimer(Player p, PotionEffectType type, int strength) {

@@ -5,7 +5,7 @@ import me.superpenguin.supercraftbros.utils.u;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.objects.GUI;
 
 public class ViewingKits extends GUI implements Paged {
@@ -18,7 +18,7 @@ public class ViewingKits extends GUI implements Paged {
 	}
 	
 	public Inventory getInventory(Player p) {
-		return Main.getKitInventory(page);
+		return SuperCraftBros.getKitInventory(page);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class ViewingKits extends GUI implements Paged {
 
 	@Override
 	public boolean hasNextPage() {
-		return Main.getPages() > page;
+		return SuperCraftBros.getPages() > page;
 	}
 	
 	@Override

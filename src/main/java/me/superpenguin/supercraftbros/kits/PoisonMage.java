@@ -15,8 +15,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.SPlayer;
@@ -40,7 +40,7 @@ public class PoisonMage extends Kit {
 	@Override
 	public void RightClickWithWeapon1(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		SPlayer s = Main.getPlayer(p.getUniqueId());
+		SPlayer s = SuperCraftBros.getPlayer(p.getUniqueId());
 		if (s.isBonusReady()) {
 			ThrownPotion t = p.launchProjectile(ThrownPotion.class);
 			t.setItem(((PIB)new PIB(Material.SPLASH_POTION, 1, PotionEffectType.POISON, 1, 5).setBasePotionData(PotionType.POISON).setLocname("bonus")).buildPotion());

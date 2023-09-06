@@ -2,7 +2,7 @@ package me.superpenguin.supercraftbros.guis;
 
 import java.util.List;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.crafting.craftingutil;
 import me.superpenguin.supercraftbros.objects.GUI;
 import me.superpenguin.supercraftbros.utils.button;
@@ -55,7 +55,7 @@ public class Crafting extends GUI {
 							return;
 						}
 					}
-				}.runTaskLater(Main.get(), 1);
+				}.runTaskLater(SuperCraftBros.get(), 1);
 			} else e.setCancelled(true);
 		} else {
 			new BukkitRunnable() {				
@@ -63,7 +63,7 @@ public class Crafting extends GUI {
 				public void run() {
 					craftingutil.UpdateResult(inv);
 				}
-			}.runTaskLater(Main.get(), 1);
+			}.runTaskLater(SuperCraftBros.get(), 1);
 		}
 	}
 	

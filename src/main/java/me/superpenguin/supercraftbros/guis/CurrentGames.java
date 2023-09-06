@@ -9,7 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.objects.GUI;
 import me.superpenguin.supercraftbros.objects.Parties;
 
@@ -23,8 +23,8 @@ public class CurrentGames extends GUI {
 	public Inventory getInventory(Player p) {
 		Inventory inv = Bukkit.createInventory(null, 54, u.cc("&aOngoing Games"));
 		
-		for (int i : Main.runningGames.keySet()) {
-			Game g = Main.runningGames.get(i);
+		for (int i : SuperCraftBros.runningGames.keySet()) {
+			Game g = SuperCraftBros.runningGames.get(i);
 			inv.addItem(
 					new MIB(g.getMap().getIcon().getType()).addLores(
 							"&aStatus: &c&l" + g.getState().toString(),
@@ -42,10 +42,10 @@ public class CurrentGames extends GUI {
 	@Override
 	public void clicked(Player p, String locname) {
 		UUID uuid = p.getUniqueId();
-		if (Main.getGame(p) == null) {
+		if (SuperCraftBros.getGame(p) == null) {
 			int ID = -1;
 			try { ID = Integer.parseInt(locname); } catch (NumberFormatException ex) { return; }
-			Game g = Main.getGame(ID);
+			Game g = SuperCraftBros.getGame(ID);
 			if (g.getState() == Game.gamestate.LOBBY) {
 				if (Parties.isInParty(uuid) && !(Parties.getParty(uuid).isLeader(uuid))) {
 					p.sendMessage(u.cc("&cWait for your party leader to start a game"));

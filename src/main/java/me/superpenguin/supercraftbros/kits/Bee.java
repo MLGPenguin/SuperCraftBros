@@ -16,8 +16,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 
@@ -47,8 +47,8 @@ public class Bee extends Kit {
 	public void RightClickWithBonusItem(PlayerInteractEvent e) {
 			e.setCancelled(true);
 			Player p = e.getPlayer();
-			Player target = u.getClosestPlayer(p, Main.getGame(p).getAlivePlayersWithout(p));
-			Game g = Main.getGame(p);
+			Player target = u.getClosestPlayer(p, SuperCraftBros.getGame(p).getAlivePlayersWithout(p));
+			Game g = SuperCraftBros.getGame(p);
 			for (int i = 0 ; i < 5 ; i++) {
 				org.bukkit.entity.Bee bee = (org.bukkit.entity.Bee) e.getPlayer().getWorld().spawnEntity(e.getPlayer().getLocation(), EntityType.BEE);
 				bee.setAnger(1);

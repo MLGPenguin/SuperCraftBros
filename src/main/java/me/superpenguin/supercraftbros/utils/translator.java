@@ -1,7 +1,7 @@
 package me.superpenguin.supercraftbros.utils;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.Map;
 
@@ -14,7 +14,7 @@ public class translator {
 	}
 	
 	public static Kit getKit(kitType type) {
-		return Main.ClassSelector.get(type);
+		return SuperCraftBros.ClassSelector.get(type);
 	}
 	
 	public static Map.MapType getMap(String name) {

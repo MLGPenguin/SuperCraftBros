@@ -2,7 +2,7 @@ package me.superpenguin.supercraftbros.objects;
 
 import java.util.List;
 
-import me.superpenguin.supercraftbros.Main;
+import me.superpenguin.supercraftbros.SuperCraftBros;
 import me.superpenguin.supercraftbros.customevents.DropBelowHalfHealthEvent;
 import me.superpenguin.supercraftbros.utils.u;
 import org.bukkit.entity.Player;
@@ -19,34 +19,34 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public abstract class Kit {
 	
-	private Main.kitType type;
+	private SuperCraftBros.kitType type;
 	private String name;
 	private Armour armour;
 	
 	
-	public Kit(Main.kitType type, String name, Armour Armour) {
+	public Kit(SuperCraftBros.kitType type, String name, Armour Armour) {
 		this.type = type;
 		this.name = name;
 		this.armour = Armour;
-		Main.ClassSelector.put(type, this);
+		SuperCraftBros.ClassSelector.put(type, this);
 	}
 	
-	public Main.kitType getType() { return type; }
+	public SuperCraftBros.kitType getType() { return type; }
 	public ItemStack[] getArmour() { return armour.get(); }
 	public ItemStack getHead() { return armour.getHead(); }
 	public int getLives() { return 5; }
 	public String getName() { return name; }
 	
-	private boolean within(Main.pack pack) {
+	private boolean within(SuperCraftBros.pack pack) {
 		return pack.getKits().contains(type);				
 	}
 	public ItemStack getIcon() { 
 		ItemStack i = getHead();
 		ItemMeta m = i.getItemMeta();
-		String colour =   within(Main.pack.DEFAULT) ? "&7"
-						: within(Main.pack.GEM) ? "&a"
-						: within(Main.pack.RANK) ? "&5"
-						: within(Main.pack.ACHIEVEMENT) ? "&6"
+		String colour =   within(SuperCraftBros.pack.DEFAULT) ? "&7"
+						: within(SuperCraftBros.pack.GEM) ? "&a"
+						: within(SuperCraftBros.pack.RANK) ? "&5"
+						: within(SuperCraftBros.pack.ACHIEVEMENT) ? "&6"
 						: "&b";
 		m.setDisplayName(u.cc(colour + name));
 		m.setLocalizedName(type.toString());

@@ -12,8 +12,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 
@@ -39,7 +39,7 @@ public class Endermite extends Kit {
 	public void RightClickWithBonusItem(PlayerInteractEvent e) {
 		if (e.getItem().getItemMeta().getLocalizedName().equals("bonus")) {
 			u.takeOneFromItemInHand(e.getPlayer());
-			e.getPlayer().teleport(u.getClosestPlayer(e.getPlayer(), Main.getGame(e.getPlayer()).getAlivePlayersWithout(e.getPlayer())));
+			e.getPlayer().teleport(u.getClosestPlayer(e.getPlayer(), SuperCraftBros.getGame(e.getPlayer()).getAlivePlayersWithout(e.getPlayer())));
 		}
 	}
 	

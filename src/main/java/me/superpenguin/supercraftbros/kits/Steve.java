@@ -12,8 +12,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.SPlayer;
@@ -46,7 +46,7 @@ public class Steve extends Kit {
 				Block newPlace = e.getClickedBlock().getRelative(e.getBlockFace());
 				if (newPlace.getType() == Material.AIR) {
 					newPlace.setType(Material.LAVA);
-					SPlayer sp = Main.getPlayer(e.getPlayer().getUniqueId());
+					SPlayer sp = SuperCraftBros.getPlayer(e.getPlayer().getUniqueId());
 					sp.addBlockToReplaceList(newPlace);
 					held.setAmount(0);
 				}				
@@ -56,7 +56,7 @@ public class Steve extends Kit {
 
 	@Override
 	public void OnKitKilled(EntityDeathEvent e) {
-		SPlayer sp =  Main.getPlayer(((Player)e.getEntity()).getUniqueId());
+		SPlayer sp =  SuperCraftBros.getPlayer(((Player)e.getEntity()).getUniqueId());
 		for (Block b : sp.getReplaceWithAirOnDeathList()) b.setType(Material.AIR);
 		sp.clearReplaceList();		
 	}

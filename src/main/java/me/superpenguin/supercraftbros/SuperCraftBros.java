@@ -34,7 +34,7 @@ import me.superpenguin.supercraftbros.objects.Kit;
 import me.superpenguin.supercraftbros.objects.Parties;
 import me.superpenguin.supercraftbros.objects.SPlayer;
 
-public class Main extends JavaPlugin {
+public class SuperCraftBros extends JavaPlugin {
 	
 	public static Set<UUID> frozen;
 	public static HashMap<UUID, GUI> viewingGUI;
@@ -161,7 +161,7 @@ public class Main extends JavaPlugin {
 	
 	
 	public static SPlayer getPlayer(UUID uuid) {
-		return hasPlayer(uuid) ? Main.playerData.get(uuid) : new SPlayer(uuid);
+		return hasPlayer(uuid) ? SuperCraftBros.playerData.get(uuid) : new SPlayer(uuid);
 	}
 	
 	public static SPlayer getPlayerWithoutCreating(UUID uuid) {
@@ -189,7 +189,7 @@ public class Main extends JavaPlugin {
 		else return null;
 	}
 	
-	public static Main get() { return Main.getPlugin(Main.class); }
+	public static SuperCraftBros get() { return SuperCraftBros.getPlugin(SuperCraftBros.class); }
 	
 	public enum kitType {
 		COW, BAT, BLAZE, CHICKEN, PANDA, GINGERBREADMAN, BEE, OCELOT, RABBIT, IRONGOLEM, ENDERDRAGON, PUFFERFISH, ZOMBIEPIGMAN, HEROBRINE, STEVE, GHAST, ENDERMAN,

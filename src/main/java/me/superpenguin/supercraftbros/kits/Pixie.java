@@ -14,8 +14,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 
@@ -55,7 +55,7 @@ public class Pixie extends Kit {
 	
 	@Override
 	public void DamagedByPlayer(EntityDamageByEntityEvent e) {
-		e.getEntity().teleport(Main.getGame((Player)e.getEntity()).getSafeSpawn());
+		e.getEntity().teleport(SuperCraftBros.getGame((Player)e.getEntity()).getSafeSpawn());
 	}
 
 

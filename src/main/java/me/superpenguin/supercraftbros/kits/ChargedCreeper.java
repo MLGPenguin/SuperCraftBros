@@ -18,8 +18,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffectType;
 
-import me.superpenguin.supercraftbros.Main;
-import me.superpenguin.supercraftbros.Main.kitType;
+import me.superpenguin.supercraftbros.SuperCraftBros;
+import me.superpenguin.supercraftbros.SuperCraftBros.kitType;
 import me.superpenguin.supercraftbros.objects.Armour;
 import me.superpenguin.supercraftbros.objects.Kit;
 
@@ -49,7 +49,7 @@ public class ChargedCreeper extends Kit implements ExplosionResistant {
 		TNTPrimed tnt  = (TNTPrimed) l.getWorld().spawnEntity(l, EntityType.PRIMED_TNT);
 		tnt.setVelocity(p.getLocation().getDirection());
 		tnt.setFuseTicks(30);
-		tnt.getPersistentDataContainer().set(new NamespacedKey(Main.get(), "Creeper"), PersistentDataType.STRING, e.getPlayer().getName());
+		tnt.getPersistentDataContainer().set(new NamespacedKey(SuperCraftBros.get(), "Creeper"), PersistentDataType.STRING, e.getPlayer().getName());
 	}
 	
 	@Override
