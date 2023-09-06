@@ -1,6 +1,6 @@
 author: SuperPenguin
 description: "SUPERCRAFTBROS WOOO"
-main: me.Penguin.SuperCraftBros.Main
+main: me.superpenguin.supercraftbros.Main
 name: SuperCraftBros
 version: 1.0.0
 depend: []
