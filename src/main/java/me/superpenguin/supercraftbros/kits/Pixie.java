@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
@@ -55,6 +56,9 @@ public class Pixie extends Kit {
 	
 	@Override
 	public void DamagedByPlayer(EntityDamageByEntityEvent e) {
+		EntityDamageEvent.DamageCause cause = e.getCause();
+		if (cause == EntityDamageEvent.DamageCause.THORNS || cause == EntityDamageEvent.DamageCause.FIRE_TICK) return;
+
 		if (u.getRandomNumberBetween(0, 10) >= 5) // 50% chance
 			e.getEntity().teleport(SuperCraftBros.getGame((Player)e.getEntity()).getSafeSpawn());
 	}
