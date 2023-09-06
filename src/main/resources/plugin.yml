@@ -1,0 +1,48 @@
+author: SuperPenguin
+description: "SUPERCRAFTBROS WOOO"
+main: me.Penguin.SuperCraftBros.Main
+name: SuperCraftBros
+version: 1.0.0
+depend: []
+softdepend: []
+api-version: 1.16
+
+commands:
+    
+  startgame:
+    usage: /<command> []
+    description: "bring up a map selection GUI to start the game"
+    aliases: [sg]
+    
+  kitsomething:
+    usage: /<command>
+    desciption: "view all kits"
+    
+  games:
+    usage: /<command>
+    desciption: "view all currently running games"
+    
+  gems:
+    usage: /<command>
+    
+  statistics:
+    usage: /<command>
+    aliases: [stats]
+    
+  party:
+    usage: /<command>
+    
+  customcrafting:
+    usage: /<command>
+  
+  backpack:
+   usage: /<command>
+  
+
+
+
+permissions: 
+   
+  supercraftbros.admin:
+    default: op
+    description: "all admin perms"
