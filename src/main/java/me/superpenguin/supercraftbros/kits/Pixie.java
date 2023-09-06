@@ -55,7 +55,8 @@ public class Pixie extends Kit {
 	
 	@Override
 	public void DamagedByPlayer(EntityDamageByEntityEvent e) {
-		e.getEntity().teleport(SuperCraftBros.getGame((Player)e.getEntity()).getSafeSpawn());
+		if (u.getRandomNumberBetween(0, 10) >= 5) // 50% chance
+			e.getEntity().teleport(SuperCraftBros.getGame((Player)e.getEntity()).getSafeSpawn());
 	}
 
 

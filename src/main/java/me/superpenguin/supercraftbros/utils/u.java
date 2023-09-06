@@ -158,7 +158,11 @@ public class u {
 		}
 		return s;
 	}
-	
+
+	/**
+	 * Gets a random number between lower and higher where the lower number is inclusive and the upper
+	 * number is exclusive
+	 */
 	public static int getRandomNumberBetween(int lower, int higher) {
 		Random rand = new Random();
 		return lower + rand.nextInt(higher - lower);
