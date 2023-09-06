@@ -61,7 +61,7 @@ public class Cat extends Kit {
 	@Override
 	public void activatePerks(Player p) {
 		u.applyInfinitePotionEffect(p, PotionEffectType.SPEED, 2);
-		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(10);
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(12);
 	}
 	
 	@Override
